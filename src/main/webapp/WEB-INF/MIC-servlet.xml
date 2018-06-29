@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context 
+       http://www.springframework.org/schema/context/spring-context-3.0.xsd
+       http://www.springframework.org/schema/util 
+       http://www.springframework.org/schema/util/spring-util-3.0.xsd 
+       http://www.springframework.org/schema/mvc 
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+  ">
+	<!-- 扫web包，应用Spring的注解 -->
+	<context:component-scan base-package="com.mic.web.**"/>
+	
+	<!-- 指明路径 -->
+	<mvc:annotation-driven/>
+	<bean id="bresource" class="com.mic.core.TmBasePathExposer" init-method="init"></bean>
+	<mvc:resources location="/" mapping="#{bresource.basePath }/**"/>
+	
+	<!-- 配置图示解释器，将ModelAndView及字符串解析为具体的页面 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		p:viewClass="org.springframework.web.servlet.view.JstlView"
+		p:prefix="/WEB-INF/pages/"
+		p:suffix=".jsp"/>
+		
+		
+	<!-- 登陆拦截器 -->
+	<!-- <mvc:interceptors> -->
+		<!-- 设置login不拦截 拦截其他的 -->
+		<!-- <mvc:interceptor>
+			<mvc:mapping path="/addweight**"/>
+			<mvc:mapping path="/comment**"/>
+			<mvc:mapping path="/admin"/>
+			<mvc:exclude-mapping path="/login"/>
+			<bean class="com.looc.music.core.LoginCore"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+	<!-- 管理员拦截器 -->
+<!-- 	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/admin"/>
+			<mvc:mapping path="/admin/admin/**"/>
+			<bean class="com.looc.music.core.AdminCore"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/author"/>
+			<mvc:mapping path="/admin/author/**"/>
+			<bean class="com.looc.music.core.AuthorCore"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors> -->
+	
+	<!-- 文件上传 -->
+<!-- 	<bean id="multipartResolver" 
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="1024288000"/>	
+		<property name="defaultEncoding" value="UTF-8"/>
+	</bean> -->
+	
+</beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
